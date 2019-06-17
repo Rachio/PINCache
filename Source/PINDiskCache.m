@@ -582,15 +582,6 @@ static NSURL *_sharedTrashURL;
     }
     
     [self lock];
-        if (byteCount > 0)
-            _byteCount = byteCount;
-    
-        if (self->_byteLimit > 0 && self->_byteCount > self->_byteLimit)
-            [self trimToSizeByDateAsync:self->_byteLimit completion:nil];
-
-        if (self->_ttlCache)
-            [self removeExpiredObjectsAsync:nil];
-    
         _diskStateKnown = YES;
         pthread_cond_broadcast(&_diskStateKnownCondition);
     [self unlock];
